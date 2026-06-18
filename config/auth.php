@@ -38,6 +38,10 @@ return [
     */
 
     'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'tbl_admin',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -62,6 +66,10 @@ return [
     */
 
     'providers' => [
+        'tbl_admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\ACL\AdminUserModel::class,
+        ],
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
