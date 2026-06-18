@@ -7,7 +7,7 @@
     <title>{{ config('app.name') }}</title>
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('adminPanel/assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('icons/header-logo.svg') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Fonts -->
