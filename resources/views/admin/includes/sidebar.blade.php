@@ -5,10 +5,9 @@
     use App\Models\ACL\ModuleRolePrivillege;
 
     // Logged-in admin roles
-    $roleIds = AdminRolePrivillege::where(
-        'admin_id',
-        Auth::guard('admin')->user()->id
-    )->pluck('role_id')->toArray();
+    $roleIds = AdminRolePrivillege::where('admin_id', Auth::guard('admin')->user()->id)
+        ->pluck('role_id')
+        ->toArray();
 
     // All categories
     $categories = ModuleCategory::orderBy('display_order', 'ASC')->get();
@@ -18,7 +17,8 @@
 
     <div class="app-brand demo">
         <a href="{{ url('admin') }}" class="app-brand-link">
-            <span class="app-brand-text fw-bolder">Softlinks RBAC</span>
+            <span class="app-brand-text fw-bolder fs-3"
+                style="font-size: 1.6rem !important; text-transform: uppercase; letter-spacing: 1px;">TRANSLOGIX</span>
         </a>
     </div>
 
@@ -34,14 +34,13 @@
 
         {{-- Dynamic Category Menus --}}
         @foreach ($categories as $category)
-
             @php
                 $modules = ModuleRolePrivillege::join(
-                        'tbl_modules',
-                        'tbl_role_privileges.module_id',
-                        '=',
-                        'tbl_modules.id'
-                    )
+                    'tbl_modules',
+                    'tbl_role_privileges.module_id',
+                    '=',
+                    'tbl_modules.id',
+                )
                     ->whereIn('tbl_role_privileges.role_id', $roleIds)
                     ->where('tbl_modules.module_category_id', $category->id)
                     ->where('tbl_modules.show_in_menu', 1)
@@ -79,7 +78,6 @@
                     @endforeach
                 </ul>
             </li>
-
         @endforeach
 
     </ul>
