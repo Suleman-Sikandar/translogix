@@ -5,7 +5,7 @@
                <script>
                    document.write(new Date().getFullYear());
                </script>
-               -SoftLinks RBAC Package — Secure Access, Simplified Control.
+               Made with ❤️ by <span class="fw-bold text-primary">Suleman Sikandar</span>
            </div>
        </div>
    </footer>
