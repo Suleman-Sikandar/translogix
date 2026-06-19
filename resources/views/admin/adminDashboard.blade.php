@@ -1,7 +1,7 @@
 @extends('admin.layout.app')
 
 @section('sidebar')
-    @include('admin.includes.sideBar')
+    @include('admin.includes.sidebar')
 @endsection
 @section('navbar')
     @include('admin.includes.navBar')

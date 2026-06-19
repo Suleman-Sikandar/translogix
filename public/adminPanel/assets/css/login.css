@@ -1,213 +1,323 @@
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-    --primary-color: #1e3c72;
-    --secondary-color: #2a5298;
-    --accent-color: #00d2ff;
-    --text-color: #333;
-    --text-light: #fff;
-    --bg-light: #fdfdfd;
-    --input-bg: #f5f6f8;
-    --transition: all 0.3s ease;
+    --navy: #161B22;
+    --navy-2: #1F2733;
+    --accent-orange: #E8622C;
+    --accent-orange-dark: #C94F1F;
+    --route-yellow: #F4B400;
+    --paper: #F6F4EF;
+    --steel: #5C6B73;
+    --text-dark: #1A1F26;
+    --border-soft: #E4E0D6;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; }
 
 body {
-    font-family: 'Outfit', sans-serif;
-    height: 100vh;
-    overflow: hidden;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
 }
 
 .login-container {
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
 }
 
-/* Left Side - Brand Section */
+/* ---------- Left: Dispatch board / brand panel ---------- */
+
 .brand-section {
-    flex: 1;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    position: relative;
+    flex: 1 1 50%;
+    background: linear-gradient(155deg, var(--navy) 0%, var(--navy-2) 100%);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--text-light);
-    position: relative;
+    justify-content: space-between;
+    padding: 56px 64px;
     overflow: hidden;
-    padding: 2rem;
-    text-align: center;
 }
 
+/* faint manifest grid texture */
 .brand-section::before {
-    content: '';
+    content: "";
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-    animation: rotate 20s linear infinite;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(244,180,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244,180,0,0.04) 1px, transparent 1px);
+    background-size: 38px 38px;
+    pointer-events: none;
 }
 
-@keyframes rotate {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+.brand-logo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.brand-logo svg {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+.brand-logo-word {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #F6F4EF;
+}
+
+.brand-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--route-yellow);
+    margin: 0 0 18px 0;
+    position: relative;
+    z-index: 1;
 }
 
 .brand-content {
-    z-index: 2;
-    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Route map illustration filling the lower brand panel */
+.brand-illustration {
+    position: relative;
+    z-index: 1;
+    margin-top: 36px;
+    width: 100%;
+}
+
+.brand-illustration svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    overflow: visible;
+}
+
+.truck-marker {
+    animation: drive 7s linear infinite;
+    offset-rotate: 0deg;
+}
+
+@keyframes drive {
+    0%   { offset-distance: 0%; }
+    100% { offset-distance: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .truck-marker { animation: none; offset-distance: 35%; }
+}
+
+/* Sign-in side mark above the form */
+.form-mark {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 18px;
 }
 
 .brand-title {
-    font-size: 3.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
     font-weight: 700;
-    margin-bottom: 1rem;
-    letter-spacing: -1px;
-    text-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    font-size: 64px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #F6F4EF;
+    margin: 0 0 14px 0;
+    line-height: 0.95;
+}
+
+.brand-title span {
+    color: var(--accent-orange);
 }
 
 .brand-subtitle {
-    font-size: 1.2rem;
-    font-weight: 300;
-    opacity: 0.9;
+    font-size: 15px;
     line-height: 1.6;
+    color: #A9B3BC;
+    max-width: 360px;
+    margin: 0;
 }
 
-/* Right Side - Form Section */
-.form-section {
-    flex: 1;
-    background-color: var(--bg-light);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
+.brand-subtitle strong {
+    color: #F6F4EF;
+    font-weight: 600;
+}
+
+.brand-footer {
     position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: #5C6B73;
+    letter-spacing: 0.04em;
+}
+
+.brand-footer .coords::before {
+    content: "◍ HQ ";
+    color: var(--steel);
+}
+
+/* ---------- Right: Form panel ---------- */
+
+.form-section {
+    flex: 1 1 50%;
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
 }
 
 .form-wrapper {
     width: 100%;
-    max-width: 420px;
-    padding: 2.5rem;
-    background: #fff;
-    border-radius: 16px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+    max-width: 380px;
 }
 
 .form-header {
-    margin-bottom: 2rem;
-    text-align: left;
+    margin-bottom: 32px;
+}
+
+.form-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-orange);
+    margin: 0 0 10px 0;
 }
 
 .form-title {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 34px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-dark);
+    margin: 0 0 6px 0;
 }
 
 .form-subtitle {
-    color: #666;
-    font-size: 0.95rem;
+    font-size: 14px;
+    color: var(--steel);
+    margin: 0;
+}
+
+.alert {
+    padding: 12px 14px;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    border-left: 3px solid var(--accent-orange-dark);
+    background: #FCEDE7;
+    color: #9C3B16;
+}
+
+.alert ul {
+    margin: 0;
+    padding-left: 18px;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .form-label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #555;
-    font-size: 0.9rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--steel);
+    margin-bottom: 8px;
 }
 
 .form-control {
     width: 100%;
-    padding: 0.8rem 1rem;
-    border: 2px solid #e1e5ee;
-    border-radius: 8px;
-    background-color: var(--input-bg);
-    font-size: 1rem;
-    font-family: inherit;
-    transition: var(--transition);
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background: #fff;
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-control::placeholder {
+    color: #9AA3AA;
 }
 
 .form-control:focus {
     outline: none;
-    border-color: var(--secondary-color);
-    background-color: #fff;
-    box-shadow: 0 0 0 4px rgba(42, 82, 152, 0.1);
+    border-color: var(--accent-orange);
+    box-shadow: 0 0 0 3px rgba(232, 98, 44, 0.14);
 }
 
 .btn-login {
     width: 100%;
-    padding: 1rem;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 13px 14px;
+    margin-top: 6px;
+    font-size: 14px;
     font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--accent-orange);
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
-    transition: var(--transition);
-    margin-top: 1rem;
+    transition: background 0.15s ease, transform 0.05s ease;
 }
 
 .btn-login:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+    background: var(--accent-orange-dark);
 }
 
 .btn-login:active {
-    transform: translateY(0);
+    transform: translateY(1px);
 }
 
-.alert {
-    padding: 0.75rem 1rem;
-    margin-bottom: 1rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
+.btn-login:focus-visible,
+.form-control:focus-visible {
+    outline: 2px solid var(--route-yellow);
+    outline-offset: 2px;
 }
 
-.alert-danger {
-    background-color: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
-}
+/* ---------- Responsive ---------- */
 
-/* Responsive Design */
-@media (max-width: 900px) {
+@media (max-width: 860px) {
     .login-container {
         flex-direction: column;
-        overflow-y: auto;
     }
-    
     .brand-section {
-        min-height: 30vh;
-        padding: 3rem 1.5rem;
+        flex: none;
+        padding: 36px 28px;
+        min-height: 220px;
     }
-    
-    .brand-title {
-        font-size: 2.2rem;
-    }
-    
+    .brand-title { font-size: 44px; }
+    .brand-footer { display: none; }
     .form-section {
-        min-height: 70vh;
-        align-items: flex-start;
-        padding-top: 3rem;
+        padding: 32px 24px;
     }
-    
-    .form-wrapper {
-        box-shadow: none;
-        padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .route-marker {
+        animation: none;
+        left: calc(100% - 10px);
     }
 }
